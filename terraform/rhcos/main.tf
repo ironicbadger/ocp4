@@ -1,7 +1,3 @@
-output "debug" {
-  value = var.guest_id
-}
-
 resource "vsphere_virtual_machine" "vm" {
   
   name                = var.name
