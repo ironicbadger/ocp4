@@ -27,6 +27,10 @@ variable "network" {
   type = string
 }
 
+variable "mac_address" {
+  type = string
+}
+
 variable "datacenter_id" {
   type = string
 }

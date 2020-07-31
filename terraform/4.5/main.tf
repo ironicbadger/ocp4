@@ -11,6 +11,7 @@ module "master" {
   guest_id         = data.vsphere_virtual_machine.template.guest_id
   datastore        = data.vsphere_datastore.nvme500.id
   network          = data.vsphere_network.network.id
+  mac_address      = var.master_macs[count.index]
   datacenter_id    = yamldecode(file("~/.config/ocp/vsphere.yaml"))["vsphere-dc"]
   template         = data.vsphere_virtual_machine.template.id
   memory           = "4096"

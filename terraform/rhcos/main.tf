@@ -19,6 +19,7 @@ resource "vsphere_virtual_machine" "vm" {
 
   network_interface {
     network_id = var.network
+    mac_address = var.mac_address
   }
 
   disk {
