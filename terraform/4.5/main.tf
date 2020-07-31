@@ -2,7 +2,7 @@ module "master" {
   source = "../rhcos"
   count  = length(var.master_macs)
 
-  name             = "${var.cluster_slug}.master${count.index + 1}"
+  name             = "${var.cluster_slug}-master${count.index + 1}"
   ignition         = "1234"
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   folder           = "awesomo/redhat/ocp45"
@@ -24,7 +24,7 @@ module "worker" {
   source = "../rhcos"
   count  = length(var.worker_macs)
 
-  name             = "${var.cluster_slug}.worker${count.index + 1}"
+  name             = "${var.cluster_slug}-worker${count.index + 1}"
   ignition         = "1234"
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   folder           = "awesomo/redhat/ocp45"
@@ -46,7 +46,7 @@ module "bootstrap" {
   source = "../rhcos"
   count  = length(var.bootstrap_mac)
 
-  name             = "${var.cluster_slug}.bootstrap"
+  name             = "${var.cluster_slug}-bootstrap"
   ignition         = "1234"
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   folder           = "awesomo/redhat/ocp45"
@@ -69,7 +69,7 @@ module "lb" {
   count  = length(var.lb_mac)
 
   name             = "${var.cluster_slug}-lb"
-  ignition         = "1234"
+  ignition         = ""
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   folder           = "awesomo/redhat/ocp45"
   guest_id         = data.vsphere_virtual_machine.rhel7.guest_id
@@ -82,6 +82,6 @@ module "lb" {
   thin_provisioned = data.vsphere_virtual_machine.rhel7.disks.0.thin_provisioned
   domain_name      = var.domain_name
   disk_size        = 20
-  memory           = "4096"
+  memory           = "1024"
   num_cpu          = "2"
 }
