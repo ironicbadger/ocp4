@@ -55,10 +55,6 @@ variable "disk_size" {
   type = string
 }
 
-variable "domain_name" {
-  type = string
-}
-
 variable "memory" {
   type = string
 }

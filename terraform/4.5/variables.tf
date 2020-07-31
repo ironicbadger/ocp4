@@ -31,9 +31,19 @@ data "vsphere_virtual_machine" "template" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
+data "vsphere_virtual_machine" "rhel7" {
+  name          = "rhel7"
+  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+}
+
 variable "cluster_slug" {
-    type    = string
-    default = "ocp45"
+  type    = string
+  default = "ocp45"
+}
+
+variable "domain_name" {
+  type = string
+  default = "ktz.lan"
 }
 
 variable "lb_mac" {
