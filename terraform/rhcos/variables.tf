@@ -31,6 +31,10 @@ variable "mac_address" {
   type = string
 }
 
+variable "adapter_type" {
+  type = string
+}
+
 variable "datacenter_id" {
   type = string
 }
@@ -40,6 +44,14 @@ variable "guest_id" {
 }
 
 variable "template" {
+  type = string
+}
+
+variable "thin_provisioned" {
+  type = string
+}
+
+variable "disk_size" {
   type = string
 }
 

@@ -18,14 +18,16 @@ resource "vsphere_virtual_machine" "vm" {
   wait_for_guest_net_routable = "false"
 
   network_interface {
-    network_id = var.network
-    mac_address = var.mac_address
+    network_id     = var.network
+    adapter_type   = var.adapter_type
+    use_static_mac = true
+    mac_address    = var.mac_address
   }
 
   disk {
     label            = "disk0"
-    size             = 16
-    thin_provisioned = "false"
+    size             = var.disk_size
+    thin_provisioned = var.thin_provisioned
   }
 
   clone {
