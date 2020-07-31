@@ -15,9 +15,9 @@ module "master" {
   template         = data.vsphere_virtual_machine.template.id
   thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   domain_name      = var.domain_name
-  disk_size        = 16
-  memory           = "4096"
-  num_cpu          = "2"
+  disk_size        = 40
+  memory           = 8192
+  num_cpu          = 4
 }
 
 module "worker" {
@@ -37,9 +37,9 @@ module "worker" {
   template         = data.vsphere_virtual_machine.template.id
   thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   domain_name      = var.domain_name
-  disk_size        = 16
-  memory           = "4096"
-  num_cpu          = "2"
+  disk_size        = 40
+  memory           = 8192
+  num_cpu          = 4
 }
 
 module "bootstrap" {
@@ -59,9 +59,9 @@ module "bootstrap" {
   template         = data.vsphere_virtual_machine.template.id
   thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   domain_name      = var.domain_name
-  disk_size        = 16
-  memory           = "4096"
-  num_cpu          = "2"
+  disk_size        = 40
+  memory           = 8192
+  num_cpu          = 4
 }
 
 module "lb" {
