@@ -67,6 +67,6 @@ variable "master_macs" {
 variable "worker_macs" {
     description = "OCP 4 Worker MAC Address"
     type        = list(string)
-    #default     = ["00:50:56:b1:c7:ca", "00:50:56:b1:c7:cb"]
-    default     = ["00:50:56:b1:c7:ca", "00:50:56:b1:c7:cb", "00:50:56:b1:c7:cc"]
+    default     = ["00:50:56:b1:c7:ca", "00:50:56:b1:c7:cb"]
+    #default     = ["00:50:56:b1:c7:ca", "00:50:56:b1:c7:cb", "00:50:56:b1:c7:cc"]
 }
