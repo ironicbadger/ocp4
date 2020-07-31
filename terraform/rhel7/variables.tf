@@ -2,10 +2,6 @@ variable "name" {
   type = string
 }
 
-# variable "instance_count" {
-#   type = string
-# }
-
 variable "ignition" {
   type    = string
   default = ""
