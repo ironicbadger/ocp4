@@ -1,5 +1,5 @@
 module "master" {
-  source = "../rhcos"
+  source = "../../rhcos"
   count  = length(var.master_macs)
 
   name             = "${var.cluster_slug}-master${count.index + 1}"
@@ -21,7 +21,7 @@ module "master" {
 }
 
 module "worker" {
-  source = "../rhcos"
+  source = "../../rhcos"
   count  = length(var.worker_macs)
 
   name             = "${var.cluster_slug}-worker${count.index + 1}"
@@ -43,7 +43,7 @@ module "worker" {
 }
 
 module "bootstrap" {
-  source = "../rhcos"
+  source = "../../rhcos"
   count  = length(var.bootstrap_mac)
 
   name             = "${var.cluster_slug}-bootstrap"
@@ -65,7 +65,7 @@ module "bootstrap" {
 }
 
 module "lb" {
-  source = "../rhcos"
+  source = "../../rhcos"
   count  = length(var.lb_mac)
 
   name             = "${var.cluster_slug}-lb"
