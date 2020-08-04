@@ -30,10 +30,11 @@ resource "vsphere_virtual_machine" "vm" {
     template_uuid = var.template
   }
 
-  # vapp {
-  #   properties = {
-  #     "guestinfo.ignition.config.data"          = "${base64encode(data.ignition_config.ign.*.rendered[count.index])}"
-  #     "guestinfo.ignition.config.data.encoding" = "base64"
-  #   }
-  # }
+  vapp {
+    properties = {
+      "guestinfo.ignition.config.data"          = var.ignition_rendered
+      "guestinfo.ignition.config.data.encoding" = "base64"
+    }
+  }
+
 }

@@ -7,6 +7,15 @@ variable "ignition" {
   default = ""
 }
 
+variable "ignition_url" {
+  type    = string
+  default = ""
+}
+
+variable "ignition_rendered" {
+  type    = string
+}
+
 variable "resource_pool_id" {
   type = string
 }

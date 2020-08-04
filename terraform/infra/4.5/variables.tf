@@ -11,6 +11,11 @@ variable "domain_name" {
   default = "ktz.lan"
 }
 
+variable "bootstrap_complete" {
+  type    = string
+  default = "false"
+}
+
 variable "lb_mac" {
     description = "OCP 4 HAProxy MAC Address"
     type        = list(string)
@@ -36,11 +41,23 @@ variable "worker_macs" {
     #default     = ["00:50:56:b1:c7:ca", "00:50:56:b1:c7:cb", "00:50:56:b1:c7:cc"]
 }
 
+variable "bootstrap_ignition_url" {
+    description = "URL of append-bootstrap.ign"
+    type        = string
+    #default     = "http://lb.ocp4.ktz.lan:8080/ignition/bootstrap.ign"
+    default     = "http://192.168.1.25:8000/append-bootstrap.ign"
+}
+
+variable "ignition" {
+  type    = string
+  default = ""
+}
+
 ##############
 ## VMware templates to clone
 
 data "vsphere_virtual_machine" "template" {
-  name          = "rhcos-4.4.3"
+  name          = "RHCOS43"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
