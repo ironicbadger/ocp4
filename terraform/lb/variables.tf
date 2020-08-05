@@ -6,7 +6,7 @@ variable "api_backend_addresses" {
   type = list(string)
 }
 
-variable "worker_ips" {
+variable "ingress" {
   type    = list(string)
   default = []
 }
