@@ -90,3 +90,50 @@ data "vsphere_datastore" "nvme500" {
   name          = "nvme500"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
+
+##########
+## Ignition
+
+provider "ignition" {
+  # https://www.terraform.io/docs/providers/ignition/index.html
+  version = "1.2.1"
+}
+
+
+#########
+## Machine variables
+
+variable "bootstrap_ignition_path" {
+  type    = string
+  default = "../../../openshift/ignition-configs/bootstrap.ign"
+}
+
+variable "master_ignition_path" {
+  type    = string
+  default = "../../../openshift/ignition-configs/master.ign"
+}
+
+variable "worker_ignition_path" {
+  type    = string
+  default = "../../../openshift/ignition-configs/worker.ign"
+}
+
+variable "master_ips" {
+  type    = list(string)
+  default = []
+}
+
+variable "worker_ips" {
+  type    = list(string)
+  default = []
+}
+
+variable "bootstrap_ip" {
+  type    = string
+  default = ""
+}
+
+variable "loadbalancer_ip" {
+  type    = string
+  default = ""
+}
