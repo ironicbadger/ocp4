@@ -1,9 +1,15 @@
 init:
-	cd terraform/infra/4.5; terraform init
+	cd terraform/clusters/4.5; terraform init
 
 create:
-	#cd openshift; ./generate-configs.sh
-	cd terraform/infra/4.5; terraform apply -auto-approve
+	cd openshift; ./generate-configs.sh
+	cd terraform/clusters/4.5; terraform apply -auto-approve
 
 nuke:
-	cd terraform/infra/4.5; terraform destroy
+	cd terraform/clusters/4.5; terraform destroy
+
+wait-for-bootstrap:
+	cd openshift/ignition-configs; openshift-install wait-for install-complete --log-level debug
+
+wait-for-install:
+	cd openshift/ignition-configs; openshift-install wait-for install-complete --log-level debug
