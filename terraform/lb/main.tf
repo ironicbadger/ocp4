@@ -3,13 +3,13 @@ data "ignition_systemd_unit" "haproxy" {
   content = file("${path.module}/haproxy.service")
 }
 
-data "ignition_filesystem" "haproxy" {
-  name = "haproxy"
-  path = "/etc/haproxy/haproxy.conf"
+data "ignition_filesystem" "root" {
+  name = "root"
+  path = "/"
 }
 
 data "ignition_file" "haproxy" {
-  filesystem = "haproxy"
+  filesystem = "root"
   path       = "/etc/haproxy/haproxy.conf"
   mode       = "420" // 0644
   content {
@@ -27,8 +27,8 @@ data "ignition_user" "core" {
 }
 
 data "ignition_config" "lb" {
-  users = [data.ignition_user.core.rendered]
-  #files = [data.ignition_file.haproxy.rendered]
+  users   = [data.ignition_user.core.rendered]
+  files   = [data.ignition_file.haproxy.rendered]
   systemd = [data.ignition_systemd_unit.haproxy.rendered]
 }
 
