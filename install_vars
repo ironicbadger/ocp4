@@ -1,0 +1,9 @@
+DOMAIN=example.com
+CLUSTERID=openshift
+VCENTER_SERVER=vcenter.lab.int
+VCENTER_USER="Administrator@vsphere.local"
+VCENTER_PASS='Rand0passw0rd-oh!'
+VCENTER_DC=DC1
+VCENTER_DS=ds1
+PULL_SECRET=$(cat ~/.openshift/pull-secret.json)
+OCP_SSH_KEY=$(cat ~/.ssh/id_rsa.pub)

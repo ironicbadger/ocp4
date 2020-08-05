@@ -6,32 +6,19 @@ This repo contains code to deploy Openshift 4 for my homelab. It focuses, at lea
 > * Install `oc tools` with `./install-oc-tools.sh --latest 4.5`
 
 1. Configure DNS - https://blog.ktz.me/configure-unbound-dns-for-openshift-4/
-2. Create `openshift/install-config.yaml`
+2. Update install_vars with the correct information to populate install-config.yaml
 
 ```
-apiVersion: v1
-baseDomain: ktz.lan
-compute:
-- hyperthreading: Enabled
-  name: worker
-  replicas: 2
-controlPlane:
-  hyperthreading: Enabled
-  name: master
-  replicas: 3
-metadata:
-  name: ocp4
-networking:
-  clusterNetworks:
-  - cidr: 10.254.0.0/16
-    hostPrefix: 24
-  networkType: OpenShiftSDN
-  serviceNetwork:
-  - 172.30.0.0/16
-platform:
-  none: {}
-pullSecret: 'YOUR_PULL_SECRET'
-sshKey: 'YOUR_SSH_PUBKEY'
+DOMAIN=example.com
+CLUSTERID=openshift
+VCENTER_SERVER=vcenter.lab.int
+VCENTER_USER="Administrator@vsphere.local"
+VCENTER_PASS='Rand0passw0rd-oh!'
+VCENTER_DC=DC1
+VCENTER_DS=ds1
+PULL_SECRET=$(cat ~/.openshift/pull-secret.json)
+OCP_SSH_KEY=$(cat ~/.ssh/id_rsa.pub)
+
 ```
 
 3. Customize `terraform/clusters/4.5/terraform.tfvars` with the relevant information. This repo assume you are doing mac address based DHCP reservations.
