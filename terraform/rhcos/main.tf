@@ -32,7 +32,7 @@ resource "vsphere_virtual_machine" "vm" {
 
   vapp {
     properties = {
-      "guestinfo.ignition.config.data"          = var.ignition_rendered
+      "guestinfo.ignition.config.data"          = base64encode(var.ignition)
       "guestinfo.ignition.config.data.encoding" = "base64"
     }
   }

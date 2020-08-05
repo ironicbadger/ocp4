@@ -12,10 +12,6 @@ variable "ignition_url" {
   default = ""
 }
 
-variable "ignition_rendered" {
-  type    = string
-}
-
 variable "resource_pool_id" {
   type = string
 }

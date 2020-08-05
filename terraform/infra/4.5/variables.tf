@@ -7,7 +7,7 @@ variable "cluster_slug" {
 }
 
 variable "domain_name" {
-  type = string
+  type    = string
   default = "ktz.lan"
 }
 
@@ -17,35 +17,34 @@ variable "bootstrap_complete" {
 }
 
 variable "lb_mac" {
-    description = "OCP 4 HAProxy MAC Address"
-    type        = list(string)
-    default     = ["00:50:56:b1:ef:ac"]
+  description = "OCP 4 HAProxy MAC Address"
+  type        = list(string)
+  default     = ["00:50:56:b1:ef:ac"]
 }
 
 variable "bootstrap_mac" {
-    description = "OCP 4 Bootstrap MAC Address"
-    type        = list(string)
-    default     = ["00:50:56:b1:c7:ae"]
+  description = "OCP 4 Bootstrap MAC Address"
+  type        = list(string)
+  default     = ["00:50:56:b1:c7:ae"]
 }
 
 variable "master_macs" {
-    description = "OCP 4 Master MAC Address"
-    type        = list(string)
-    default     = ["00:50:56:b1:c7:ba", "00:50:56:b1:c7:bb", "00:50:56:b1:c7:bc"]
+  description = "OCP 4 Master MAC Address"
+  type        = list(string)
+  default     = ["00:50:56:b1:c7:ba", "00:50:56:b1:c7:bb", "00:50:56:b1:c7:bc"]
 }
 
 variable "worker_macs" {
-    description = "OCP 4 Worker MAC Address"
-    type        = list(string)
-    default     = ["00:50:56:b1:c7:ca", "00:50:56:b1:c7:cb"]
-    #default     = ["00:50:56:b1:c7:ca", "00:50:56:b1:c7:cb", "00:50:56:b1:c7:cc"]
+  description = "OCP 4 Worker MAC Address"
+  type        = list(string)
+  default     = ["00:50:56:b1:c7:ca", "00:50:56:b1:c7:cb"]
+  #default     = ["00:50:56:b1:c7:ca", "00:50:56:b1:c7:cb", "00:50:56:b1:c7:cc"]
 }
 
 variable "bootstrap_ignition_url" {
-    description = "URL of append-bootstrap.ign"
-    type        = string
-    #default     = "http://lb.ocp4.ktz.lan:8080/ignition/bootstrap.ign"
-    default     = "http://192.168.1.25:8000/append-bootstrap.ign"
+  description = "URL of append-bootstrap.ign"
+  type        = string
+  default     = "http://192.168.1.25:8000/append-bootstrap.ign"
 }
 
 variable "ignition" {
@@ -57,7 +56,7 @@ variable "ignition" {
 ## VMware templates to clone
 
 data "vsphere_virtual_machine" "template" {
-  name          = "RHCOS43"
+  name          = "rhcos-4.5.2"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
