@@ -41,12 +41,6 @@ variable "worker_macs" {
   #default     = ["00:50:56:b1:c7:ca", "00:50:56:b1:c7:cb", "00:50:56:b1:c7:cc"]
 }
 
-variable "bootstrap_ignition_url" {
-  description = "URL of append-bootstrap.ign"
-  type        = string
-  default     = "http://192.168.1.25:8000/append-bootstrap.ign"
-}
-
 variable "ignition" {
   type    = string
   default = ""
