@@ -20,6 +20,9 @@ bootstrap-complete:
 get-co:
 	oc --kubeconfig openshift/ignition-configs/auth/kubeconfig get co
 
+get-nodes:
+	oc --kubeconfig openshift/ignition-configs/auth/kubeconfig get nodes
+
 get-csr:
 	oc --kubeconfig openshift/ignition-configs/auth/kubeconfig get csr
 
