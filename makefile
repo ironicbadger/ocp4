@@ -16,3 +16,6 @@ wait-for-install:
 
 bootstrap-complete:
 	cd terraform/clusters/4.5; terraform apply -auto-approve -var 'bootstrap_complete=true'
+
+get-co:
+	oc --kubeconfig openshift/ignition-configs/auth/kubeconfig get co
