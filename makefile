@@ -19,3 +19,9 @@ bootstrap-complete:
 
 get-co:
 	oc --kubeconfig openshift/ignition-configs/auth/kubeconfig get co
+
+get-csr:
+	oc --kubeconfig openshift/ignition-configs/auth/kubeconfig get csr
+
+approve-csr:
+	oc --kubeconfig openshift/ignition-configs/auth/kubeconfig get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc --kubeconfig openshift/ignition-configs/auth/kubeconfig adm certificate approve
