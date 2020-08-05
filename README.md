@@ -2,6 +2,8 @@
 
 This repo contains code to deploy Openshift 4 for my homelab. It focuses, at least for now, on UPI with vSphere 6.7u3. A full blog post will be coming soon on setting this up but the TLDR is:
 
+> This repo *requires* Terraform 0.13.
+
 1. Configure DNS - https://blog.ktz.me/configure-unbound-dns-for-openshift-4/
 2. Create `openshift/install-config.yaml`
 
