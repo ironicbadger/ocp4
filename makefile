@@ -1,4 +1,4 @@
-init:
+tfinit:
 	cd terraform/clusters/4.5; terraform init
 
 create:
@@ -13,3 +13,6 @@ wait-for-bootstrap:
 
 wait-for-install:
 	cd openshift/ignition-configs; openshift-install wait-for install-complete --log-level debug
+
+bootstrap-complete:
+	cd terraform/clusters/4.5; terraform apply -auto-approve -var 'bootstrap_complete=true'
