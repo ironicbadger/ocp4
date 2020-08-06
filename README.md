@@ -24,7 +24,7 @@ metadata:
 platform:
   vsphere:
     vcenter: 192.168.1.240
-    username: adminstrator@vsphere.lan
+    username: administrator@vsphere.lan
     password: supersecretpassword
     datacenter: ktzdc
     defaultDatastore: nvme
