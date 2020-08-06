@@ -14,22 +14,21 @@ baseDomain: ktz.lan
 compute:
 - hyperthreading: Enabled
   name: worker
-  replicas: 2
+  replicas: 0
 controlPlane:
   hyperthreading: Enabled
   name: master
   replicas: 3
 metadata:
   name: ocp4
-networking:
-  clusterNetworks:
-  - cidr: 10.254.0.0/16
-    hostPrefix: 24
-  networkType: OpenShiftSDN
-  serviceNetwork:
-  - 172.30.0.0/16
 platform:
-  none: {}
+  vsphere:
+    vcenter: 192.168.1.240
+    username: adminstrator@vsphere.lan
+    password: supersecretpassword
+    datacenter: ktzdc
+    defaultDatastore: nvme
+fips: false 
 pullSecret: 'YOUR_PULL_SECRET'
 sshKey: 'YOUR_SSH_PUBKEY'
 ```

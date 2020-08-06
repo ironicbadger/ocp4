@@ -16,7 +16,7 @@ data "ignition_file" "haproxy" {
     content = templatefile("${path.module}/haproxy.tmpl", {
       lb_ip_address = var.lb_ip_address,
       api           = var.api_backend_addresses,
-      ingress       = var.worker_ips
+      ingress       = var.ingress
     })
   }
 }

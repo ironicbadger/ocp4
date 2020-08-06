@@ -6,6 +6,7 @@ module "lb" {
     var.bootstrap_ip,
     var.master_ips]
   )
+  ingress = var.worker_ips
 }
 
 module "lb_vm" {
