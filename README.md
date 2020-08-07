@@ -4,6 +4,7 @@ This repo contains code to deploy Openshift 4 for my homelab. It focuses, at lea
 
 > * This repo *requires* Terraform 0.13
 > * Install `oc tools` with `./install-oc-tools.sh --latest 4.5`
+> * This code use yamldecode - details here https://blog.ktz.me/store-terraform-secrets-in-yaml-files-with-yamldecode/
 
 1. Configure DNS - https://blog.ktz.me/configure-unbound-dns-for-openshift-4/
 2. Create `openshift/install-config.yaml`
