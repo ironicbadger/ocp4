@@ -54,11 +54,6 @@ data "vsphere_virtual_machine" "template" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-data "vsphere_virtual_machine" "rhel7" {
-  name          = "rhel7"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
-}
-
 ################
 ## VMware vars - unlikely to need to change between releases of OCP
 
