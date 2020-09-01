@@ -2,10 +2,10 @@
 # A helper script for openshift-install
 
 ## ignition creation prep
-rm -rf ignition-configs/
-mkdir -p ignition-configs
-cp install-config.yaml ignition-configs/
-cd ignition-configs
+rm -rf openshift/
+mkdir -p openshift
+cp install-config.yaml openshift/
+cd openshift
 
 ## ignition config creation
 openshift-install create ignition-configs
