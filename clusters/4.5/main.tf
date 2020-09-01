@@ -1,5 +1,5 @@
 module "lb" {
-  source        = "../../lb"
+  source        = "../../modules/lb"
   lb_ip_address = var.loadbalancer_ip
 
   api_backend_addresses = flatten([
@@ -10,7 +10,7 @@ module "lb" {
 }
 
 module "lb_vm" {
-  source           = "../../rhcos"
+  source           = "../../modules/rhcos"
   count            = length(var.lb_mac)
   name             = "${var.cluster_slug}-lb"
   folder           = "awesomo/redhat/${var.cluster_slug}"
@@ -35,7 +35,7 @@ module "lb_vm" {
 # }
 
 module "master" {
-  source           = "../../rhcos"
+  source           = "../../modules/rhcos"
   count            = length(var.master_macs)
   name             = "${var.cluster_slug}-master${count.index + 1}"
   folder           = "awesomo/redhat/${var.cluster_slug}"
@@ -56,7 +56,7 @@ module "master" {
 }
 
 module "worker" {
-  source           = "../../rhcos"
+  source           = "../../modules/rhcos"
   count            = length(var.worker_macs)
   name             = "${var.cluster_slug}-worker${count.index + 1}"
   folder           = "awesomo/redhat/${var.cluster_slug}"
@@ -77,7 +77,7 @@ module "worker" {
 }
 
 module "bootstrap" {
-  source           = "../../rhcos"
+  source           = "../../modules/rhcos"
   count            = "${var.bootstrap_complete ? 0 : 1}"
   name             = "${var.cluster_slug}-bootstrap"
   folder           = "awesomo/redhat/${var.cluster_slug}"
