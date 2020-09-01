@@ -10,3 +10,5 @@ worker_ips = ["192.168.4.164", "192.168.4.165"]
 bootstrap_ignition_path = "../../../openshift/ignition-configs/bootstrap.ign"
 master_ignition_path = "../../../openshift/ignition-configs/master.ign"
 worker_ignition_path = "../../../openshift/ignition-configs/worker.ign"
+
+ssh_key_file = "file('~/.ssh/id_ed25519.pub')"

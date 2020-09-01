@@ -2,7 +2,7 @@ tfinit:
 	cd clusters/4.5; terraform init
 
 create:
-	cd openshift; ./generate-configs.sh
+	./generate-configs.sh
 	cd clusters/4.5; terraform apply -auto-approve
 
 nuke:

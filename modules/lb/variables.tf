@@ -12,6 +12,5 @@ variable "ingress" {
 }
 
 variable "ssh_key_file" {
-  type    = string
-  default = ""
+  type    = list(string)
 }

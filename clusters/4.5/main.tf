@@ -1,12 +1,13 @@
 module "lb" {
   source        = "../../modules/lb"
-  lb_ip_address = var.loadbalancer_ip
-
+  
+  ssh_key_file          = [file("~/.ssh/id_ed25519.pub")]
+  lb_ip_address         = var.loadbalancer_ip
   api_backend_addresses = flatten([
     var.bootstrap_ip,
     var.master_ips]
   )
-  ingress = var.worker_ips
+  ingress               = var.worker_ips
 }
 
 module "lb_vm" {
@@ -28,7 +29,7 @@ module "lb_vm" {
   adapter_type     = data.vsphere_virtual_machine.template.network_interface_types[0]
   mac_address      = var.lb_mac[count.index]
   domain_name      = var.domain_name
-  ssh_key_file     = [file("~/.ssh/id_ed25519.pub")]
+  
 }
 
 # output "ign" {
