@@ -11,7 +11,7 @@ variable "ingress" {
   default = []
 }
 
-variable "ssh_public_key_path" {
+variable "ssh_key_file" {
   type    = string
   default = ""
 }
