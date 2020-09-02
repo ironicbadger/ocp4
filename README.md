@@ -4,7 +4,7 @@ This repo contains code to deploy Openshift 4 for my homelab. It focuses on UPI 
 
 ## Usage
 
-Code for each OCP release lives on a numbered branch. The master branch represents the latest stable iteration and will likely be behind branches. In otherwords, check the number branches first before looking at master.
+Code for each OCP release lives on a numbered branch. The master branch represents the latest stable iteration and will likely be behind branches. In otherwords, check the number branches first before looking at master. 
 
 > * This repo *requires* Terraform 0.13
 > * Install `oc tools` with `./install-oc-tools.sh --latest 4.5`
