@@ -1,0 +1,22 @@
+apiVersion: v1
+baseDomain: ktz.lan
+compute:
+- hyperthreading: Enabled
+  name: worker
+  replicas: 0
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+metadata:
+  name: ocp4
+platform:
+  vsphere:
+    vcenter: 192.168.1.240
+    username: administrator@vsphere.lan
+    password: supersecretpassword
+    datacenter: ktzdc
+    defaultDatastore: nvme
+fips: false 
+pullSecret: 'YOUR_PULL_SECRET'
+sshKey: 'YOUR_SSH_PUBKEY'

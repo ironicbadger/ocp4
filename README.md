@@ -1,6 +1,6 @@
 # ironicbadger/ocp4
 
-This repo contains code to deploy Openshift 4 for my homelab. It focuses, at least for now, on UPI with vSphere 6.7u3. A full blog post will be coming soon on setting this up but the TLDR is:
+This repo contains code to deploy Openshift 4 for my homelab. It focuses on UPI with vSphere 6.7u3. A full blog post will be coming soon on setting this up but the TLDR is:
 
 > * This repo *requires* Terraform 0.13
 > * Install `oc tools` with `./install-oc-tools.sh --latest 4.5`
@@ -25,7 +25,7 @@ metadata:
 platform:
   vsphere:
     vcenter: 192.168.1.240
-    username: adminstrator@vsphere.lan
+    username: administrator@vsphere.lan
     password: supersecretpassword
     datacenter: ktzdc
     defaultDatastore: nvme

@@ -1,4 +1,4 @@
-ignition-configs/
+openshift/
 install-config.yaml
 
 # for vim swap files

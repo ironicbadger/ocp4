@@ -1,16 +1,17 @@
 module "lb" {
-  source        = "../../lb"
-  lb_ip_address = var.loadbalancer_ip
-
+  source        = "../../modules/lb"
+  
+  ssh_key_file          = [file("~/.ssh/id_ed25519.pub")]
+  lb_ip_address         = var.loadbalancer_ip
   api_backend_addresses = flatten([
     var.bootstrap_ip,
     var.master_ips]
   )
-  ingress = var.worker_ips
+  ingress               = var.worker_ips
 }
 
 module "lb_vm" {
-  source           = "../../rhcos"
+  source           = "../../modules/rhcos"
   count            = length(var.lb_mac)
   name             = "${var.cluster_slug}-lb"
   folder           = "awesomo/redhat/${var.cluster_slug}"
@@ -28,6 +29,7 @@ module "lb_vm" {
   adapter_type     = data.vsphere_virtual_machine.template.network_interface_types[0]
   mac_address      = var.lb_mac[count.index]
   domain_name      = var.domain_name
+  
 }
 
 # output "ign" {
@@ -35,7 +37,7 @@ module "lb_vm" {
 # }
 
 module "master" {
-  source           = "../../rhcos"
+  source           = "../../modules/rhcos"
   count            = length(var.master_macs)
   name             = "${var.cluster_slug}-master${count.index + 1}"
   folder           = "awesomo/redhat/${var.cluster_slug}"
@@ -56,7 +58,7 @@ module "master" {
 }
 
 module "worker" {
-  source           = "../../rhcos"
+  source           = "../../modules/rhcos"
   count            = length(var.worker_macs)
   name             = "${var.cluster_slug}-worker${count.index + 1}"
   folder           = "awesomo/redhat/${var.cluster_slug}"
@@ -77,7 +79,7 @@ module "worker" {
 }
 
 module "bootstrap" {
-  source           = "../../rhcos"
+  source           = "../../modules/rhcos"
   count            = "${var.bootstrap_complete ? 0 : 1}"
   name             = "${var.cluster_slug}-bootstrap"
   folder           = "awesomo/redhat/${var.cluster_slug}"

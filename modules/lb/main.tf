@@ -23,7 +23,7 @@ data "ignition_file" "haproxy" {
 
 data "ignition_user" "core" {
   name                = "core"
-  ssh_authorized_keys = [file("/Users/alex/.ssh/id_ed25519.pub")]
+  ssh_authorized_keys = var.ssh_key_file
 }
 
 data "ignition_config" "lb" {
