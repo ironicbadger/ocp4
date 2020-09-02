@@ -5,6 +5,9 @@ create:
 	./generate-configs.sh
 	cd clusters/4.5; terraform apply -auto-approve
 
+remove-bootstrap:
+	cd clusters/4.5; terraform apply -auto-approve -var 'bootstrap_complete=true'
+
 nuke:
 	cd clusters/4.5; terraform destroy
 
@@ -14,8 +17,7 @@ wait-for-bootstrap:
 wait-for-install:
 	cd openshift; openshift-install wait-for install-complete --log-level debug
 
-bootstrap-complete:
-	cd clusters/4.5; terraform apply -auto-approve -var 'bootstrap_complete=true'
+
 
 check-install:
 	oc --kubeconfig openshift/auth/kubeconfig get nodes && echo "" && \
