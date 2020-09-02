@@ -1,9 +1,14 @@
 # ironicbadger/ocp4
 
-This repo contains code to deploy Openshift 4 for my homelab. It focuses on UPI with vSphere 6.7u3. A full blog post will be coming soon on setting this up but the TLDR is:
+This repo contains code to deploy Openshift 4 for my homelab. It focuses on UPI with vSphere 6.7u3. 
+
+## Usage
+
+Code for each OCP release lives on a numbered branch. The master branch represents the latest stable iteration and will likely be behind branches. In otherwords, check the number branches first before looking at master.
 
 > * This repo *requires* Terraform 0.13
 > * Install `oc tools` with `./install-oc-tools.sh --latest 4.5`
+> * This code use yamldecode - details here https://blog.ktz.me/store-terraform-secrets-in-yaml-files-with-yamldecode/
 
 1. Configure DNS - https://blog.ktz.me/configure-unbound-dns-for-openshift-4/
 2. Create `openshift/install-config.yaml`
