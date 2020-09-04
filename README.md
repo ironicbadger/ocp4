@@ -11,7 +11,7 @@ Code for each OCP release lives on a numbered branch. The master branch represen
 > * This code use yamldecode - details here https://blog.ktz.me/store-terraform-secrets-in-yaml-files-with-yamldecode/
 
 1. Configure DNS - https://blog.ktz.me/configure-unbound-dns-for-openshift-4/
-2. Create `openshift/install-config.yaml`
+2. Create `install-config.yaml`
 
 ```
 apiVersion: v1
