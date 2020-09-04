@@ -11,7 +11,7 @@ Code for each OCP release lives on a numbered branch. The master branch represen
 > * This code use yamldecode - details here https://blog.ktz.me/store-terraform-secrets-in-yaml-files-with-yamldecode/
 
 1. Configure DNS - https://blog.ktz.me/configure-unbound-dns-for-openshift-4/
-2. Create `openshift/install-config.yaml`
+2. Create `install-config.yaml`
 
 ```
 apiVersion: v1
@@ -38,11 +38,21 @@ pullSecret: 'YOUR_PULL_SECRET'
 sshKey: 'YOUR_SSH_PUBKEY'
 ```
 
-3. Customize `terraform/clusters/4.5/terraform.tfvars` with the relevant information. This repo assume you are doing mac address based DHCP reservations.
-4. Run `make tfinit` to initialise Terraform modules
-5. Run `make create` to create the VMs and generate/install ignition configs
-6. Monitor install progress with `make wait-for-bootstrap`
-7. Check and approve pending CSRs with `make get-csr` and `make approve-csr`
-8. Run `make bootstrap-complete` to destroy the bootstrap VM
-9. Run `make wait-for-install` and wait for the cluster install to complete
-10. Enjoy!
+3. Customize `clusters/4.5/terraform.tfvars`, `clusters/4.5/main.tf`, and `clusters/4.5/variables.tf` with the relevant information. This repo assume you are doing mac address based DHCP reservations.
+4. create `~/.config/ocp/vsphere.yaml` that looks like this: 
+
+```
+vsphere-user: administrator@vsphere.lan
+vsphere-password: supersecretpassword
+vsphere-server: 192.168.1.240
+vsphere-dc: ktzdc
+vsphere-cluster: nvme
+```
+
+5. Run `make tfinit` to initialise Terraform modules
+6. Run `make create` to create the VMs and generate/install ignition configs
+7. Monitor install progress with `make wait-for-bootstrap`
+8. Check and approve pending CSRs with `make get-csr` and `make approve-csr`
+9. Run `make bootstrap-complete` to destroy the bootstrap VM
+10. Run `make wait-for-install` and wait for the cluster install to complete
+11. Enjoy!
