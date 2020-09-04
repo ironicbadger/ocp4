@@ -11,9 +11,12 @@ cd openshift
 openshift-install create manifests
 
 # ensure masters are not schedulable
-#sed -i 's/mastersSchedulable: true/mastersSchedulable: false/g' manifests/cluster-scheduler-02-config.yml
+if [[ `uname` == 'Linux' ]] ; then 
+sed -i 's/mastersSchedulable: true/mastersSchedulable: false/g' manifests/cluster-scheduler-02-config.yml
+else 
 # macos sed will fail. if using macos uncomment below instead (requires `brew install gnu-sed`)
 gsed -i 's/mastersSchedulable: true/mastersSchedulable: false/g' manifests/cluster-scheduler-02-config.yml
+fi
 
 ## ignition config creation
 openshift-install create ignition-configs
