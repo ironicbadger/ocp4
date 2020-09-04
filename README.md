@@ -38,7 +38,7 @@ pullSecret: 'YOUR_PULL_SECRET'
 sshKey: 'YOUR_SSH_PUBKEY'
 ```
 
-3. Customize `terraform/clusters/4.5/terraform.tfvars` with the relevant information. This repo assume you are doing mac address based DHCP reservations.
+3. Customize `clusters/4.5/terraform.tfvars`, `clusters/4.5/main.tf`, and `clusters/4.5/variables.tf` with the relevant information. This repo assume you are doing mac address based DHCP reservations.
 4. Run `make tfinit` to initialise Terraform modules
 5. Run `make create` to create the VMs and generate/install ignition configs
 6. Monitor install progress with `make wait-for-bootstrap`
