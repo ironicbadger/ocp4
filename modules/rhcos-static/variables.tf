@@ -68,6 +68,10 @@ variable "machine_cidr" {
   type = string
 }
 
+variable "gateway" {
+  type = string
+}
+
 variable "ipv4_address" {
   type = string
 }
