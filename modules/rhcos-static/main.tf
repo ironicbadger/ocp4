@@ -34,17 +34,17 @@ data "ignition_file" "static_ip" {
   }
 }
 
-data "ignition_networkd_unit" "ens192" {
+# data "ignition_networkd_unit" "ens192" {
 
-  name = "00-ens192.network"
+#   name = "00-ens192.network"
 
-  content = templatefile("${path.module}/networkd.tmpl", {
-      ip_address     = var.ipv4_address,
-      cluster_domain = var.cluster_domain,
-      dns = var.dns_addresses,
-      gateway = var.gateway,
-    })
-}
+#   content = templatefile("${path.module}/networkd.tmpl", {
+#       ip_address     = var.ipv4_address,
+#       cluster_domain = var.cluster_domain,
+#       dns = var.dns_addresses,
+#       gateway = var.gateway,
+#     })
+# }
 
 data "ignition_user" "core" {
   name                = "core"
@@ -57,7 +57,7 @@ data "ignition_config" "vm" {
     source = local.ignition_encoded
   }
   users = [data.ignition_user.core.rendered]
-  networkd = [data.ignition_networkd_unit.ens192.rendered]
+  #networkd = [data.ignition_networkd_unit.ens192.rendered]
   files = [
     data.ignition_file.hostname.rendered,
     data.ignition_file.static_ip.rendered
