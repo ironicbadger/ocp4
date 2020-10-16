@@ -25,26 +25,14 @@ data "ignition_file" "static_ip" {
 
   content {
     content = templatefile("${path.module}/ifcfg.tmpl", {
-      dns = var.dns_addresses,
-      gateway = var.gateway,
-      machine_cidr  = var.machine_cidr,
+      dns            = var.dns_addresses,
+      gateway        = var.gateway,
+      machine_cidr   = var.machine_cidr,
       ip_address     = var.ipv4_address,
       cluster_domain = var.cluster_domain
     })
   }
 }
-
-# data "ignition_networkd_unit" "ens192" {
-
-#   name = "00-ens192.network"
-
-#   content = templatefile("${path.module}/networkd.tmpl", {
-#       ip_address     = var.ipv4_address,
-#       cluster_domain = var.cluster_domain,
-#       dns = var.dns_addresses,
-#       gateway = var.gateway,
-#     })
-# }
 
 data "ignition_user" "core" {
   name                = "core"
@@ -57,7 +45,6 @@ data "ignition_config" "vm" {
     source = local.ignition_encoded
   }
   users = [data.ignition_user.core.rendered]
-  #networkd = [data.ignition_networkd_unit.ens192.rendered]
   files = [
     data.ignition_file.hostname.rendered,
     data.ignition_file.static_ip.rendered
@@ -80,8 +67,8 @@ resource "vsphere_virtual_machine" "vm" {
   wait_for_guest_net_routable = "false"
 
   network_interface {
-    network_id     = var.network
-    adapter_type   = var.adapter_type
+    network_id   = var.network
+    adapter_type = var.adapter_type
   }
 
   disk {
@@ -94,17 +81,8 @@ resource "vsphere_virtual_machine" "vm" {
     template_uuid = var.template
   }
 
-  # vapp {
-  #   properties = {
-  #     "guestinfo.ignition.config.data"          = base64encode(var.ignition)
-  #     "guestinfo.ignition.config.data.encoding" = "base64"
-  #   }
-  # }
-
   extra_config = {
     "guestinfo.ignition.config.data"          = base64encode(data.ignition_config.vm.rendered)
-    # "guestinfo.ignition.config.data"          = base64encode(var.ignition)
     "guestinfo.ignition.config.data.encoding" = "base64"
   }
-
 }
