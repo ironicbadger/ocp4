@@ -28,10 +28,6 @@ variable "network" {
   type = string
 }
 
-variable "mac_address" {
-  type = string
-}
-
 variable "adapter_type" {
   type = string
 }
@@ -62,4 +58,20 @@ variable "memory" {
 
 variable "num_cpu" {
   type = string
+}
+
+variable "cluster_domain" {
+  type = string
+}
+
+variable "machine_cidr" {
+  type = string
+}
+
+variable "ipv4_address" {
+  type = string
+}
+
+variable "dns_addresses" {
+  type = list(string)
 }

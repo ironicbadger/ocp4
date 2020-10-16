@@ -31,4 +31,3 @@ data "ignition_config" "lb" {
   files   = [data.ignition_file.haproxy.rendered]
   systemd = [data.ignition_systemd_unit.haproxy.rendered]
 }
-
