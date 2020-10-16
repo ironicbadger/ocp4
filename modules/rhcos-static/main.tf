@@ -34,17 +34,11 @@ data "ignition_file" "static_ip" {
   }
 }
 
-data "ignition_user" "core" {
-  name                = "core"
-  ssh_authorized_keys = [file("~/.ssh/id_ed25519.pub")]
-}
-
 data "ignition_config" "vm" {
 
   append {
     source = local.ignition_encoded
   }
-  users = [data.ignition_user.core.rendered]
   files = [
     data.ignition_file.hostname.rendered,
     data.ignition_file.static_ip.rendered
