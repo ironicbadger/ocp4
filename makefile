@@ -17,8 +17,6 @@ wait-for-bootstrap:
 wait-for-install:
 	cd openshift; openshift-install wait-for install-complete --log-level debug
 
-
-
 check-install:
 	oc --kubeconfig openshift/auth/kubeconfig get nodes && echo "" && \
 	oc --kubeconfig openshift/auth/kubeconfig get co && echo "" && \
