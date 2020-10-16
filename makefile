@@ -1,15 +1,21 @@
 tfinit:
 	cd clusters/4.5; terraform init
+	cd clusters/4.5-staticIPs; terraform init
 
 create:
 	./generate-configs.sh
 	cd clusters/4.5; terraform apply -auto-approve
+
+createstatic:
+	./generate-configs.sh
+	cd clusters/4.5-staticIPs; terraform apply -auto-approve
 
 remove-bootstrap:
 	cd clusters/4.5; terraform apply -auto-approve -var 'bootstrap_complete=true'
 
 nuke:
 	cd clusters/4.5; terraform destroy
+	cd clusters/4.5-staticIPs; terraform destroy
 
 wait-for-bootstrap:
 	cd openshift; openshift-install wait-for install-complete --log-level debug

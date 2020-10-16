@@ -10,6 +10,7 @@ dns_addresses = ["192.168.1.254"]
 gateway = "192.168.1.254"
 machine_cidr = "192.168.4.0/16"
 cluster_domain = "ocp4.ktz.lan"
+netmask ="255.255.0.0"
 
 ## Ignition paths
 ## Expects `openshift-install create ignition-configs` to have been run

@@ -78,5 +78,9 @@ resource "vsphere_virtual_machine" "vm" {
   extra_config = {
     "guestinfo.ignition.config.data"          = base64encode(data.ignition_config.vm.rendered)
     "guestinfo.ignition.config.data.encoding" = "base64"
+
+    # requires rhcos 4.6 but tf provider doesnt yet support ignition v3 which 4.6 requires
+    # https://github.com/terraform-providers/terraform-provider-ignition/pull/69
+    #"guestinfo.afterburn.initrd.network-kargs" = "ip=${var.ipv4_address}::${var.gateway}:${var.netmask}:${var.name}:ens192:off"
   }
 }

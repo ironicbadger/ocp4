@@ -37,13 +37,12 @@ variable "ignition" {
 ## VMware templates to clone
 
 data "vsphere_virtual_machine" "template" {
-  name          = "rhcos-4.5.2"
+  name          = "rhcos-4.5.6"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
 ################
 ## VMware vars - unlikely to need to change between releases of OCP
-
 
 provider "vsphere" {
   user           = yamldecode(file("~/.config/ocp/vsphere.yaml"))["vsphere-user"]
@@ -134,4 +133,8 @@ variable "gateway" {
 
 variable "dns_addresses" {
   type = list(string)
+}
+
+variable "netmask" {
+  type = string
 }

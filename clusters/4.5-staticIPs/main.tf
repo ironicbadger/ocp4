@@ -20,6 +20,7 @@ module "master" {
   dns_addresses    = var.dns_addresses
   gateway          = var.gateway
   ipv4_address     = var.master_ips[count.index]
+  netmask          = var.netmask
 }
 
 module "worker" {
@@ -44,6 +45,7 @@ module "worker" {
   dns_addresses    = var.dns_addresses
   gateway          = var.gateway
   ipv4_address     = var.worker_ips[count.index]
+  netmask          = var.netmask
 }
 
 module "bootstrap" {

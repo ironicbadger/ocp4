@@ -76,6 +76,10 @@ variable "ipv4_address" {
   type = string
 }
 
+variable "netmask" {
+  type = string
+}
+
 variable "dns_addresses" {
   type = list(string)
 }
