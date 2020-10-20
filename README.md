@@ -2,7 +2,7 @@
 
 This repo contains code to deploy Openshift 4 for my homelab. It focuses on UPI with vSphere 6.7u3.
 
-> Oct 20th 2020 - The code here is working against 4.6. This version of OCP uses Ignition v3 so is compatible with prior releases of RHCOS.
+> Oct 20th 2020 - The code here is working against 4.6. This version of OCP uses Ignition v3 so is incompatible with prior releases of RHCOS.
 
 ## Usage
 
