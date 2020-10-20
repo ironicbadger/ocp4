@@ -37,7 +37,7 @@ variable "ignition" {
 ## VMware templates to clone
 
 data "vsphere_virtual_machine" "template" {
-  name          = "rhcos-4.5.6"
+  name          = "rhcos-4.6.0"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 

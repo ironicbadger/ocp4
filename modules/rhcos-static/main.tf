@@ -9,30 +9,30 @@ data "ignition_filesystem" "root" {
 
 data "ignition_file" "hostname" {
 
-  filesystem = "root"
-  path       = "/etc/hostname"
-  mode       = "775"
+  #filesystem = "root"
+  path = "/etc/hostname"
+  mode = "775"
 
   content {
     content = var.name
   }
 }
 
-data "ignition_file" "static_ip" {
-  filesystem = "root"
-  path       = "/etc/sysconfig/network-scripts/ifcfg-ens192"
-  mode       = "420"
+# data "ignition_file" "static_ip" {
+#   #filesystem = "root"
+#   path = "/etc/sysconfig/network-scripts/ifcfg-ens192"
+#   mode = "420"
 
-  content {
-    content = templatefile("${path.module}/ifcfg.tmpl", {
-      dns            = var.dns_addresses,
-      gateway        = var.gateway,
-      machine_cidr   = var.machine_cidr,
-      ip_address     = var.ipv4_address,
-      cluster_domain = var.cluster_domain
-    })
-  }
-}
+#   content {
+#     content = templatefile("${path.module}/ifcfg.tmpl", {
+#       dns            = var.dns_addresses,
+#       gateway        = var.gateway,
+#       machine_cidr   = var.machine_cidr,
+#       ip_address     = var.ipv4_address,
+#       cluster_domain = var.cluster_domain
+#     })
+#   }
+# }
 
 data "ignition_config" "vm" {
 
@@ -41,7 +41,7 @@ data "ignition_config" "vm" {
   }
   files = [
     data.ignition_file.hostname.rendered,
-    data.ignition_file.static_ip.rendered
+    #data.ignition_file.static_ip.rendered
   ]
 }
 
@@ -81,6 +81,6 @@ resource "vsphere_virtual_machine" "vm" {
 
     # requires rhcos 4.6 but tf provider doesnt yet support ignition v3 which 4.6 requires
     # https://github.com/terraform-providers/terraform-provider-ignition/pull/69
-    #"guestinfo.afterburn.initrd.network-kargs" = "ip=${var.ipv4_address}::${var.gateway}:${var.netmask}:${var.name}:ens192:off"
+    "guestinfo.afterburn.initrd.network-kargs" = "ip=${var.ipv4_address}::${var.gateway}:${var.netmask}:${var.name}:ens192:off"
   }
 }
