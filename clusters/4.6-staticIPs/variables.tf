@@ -16,23 +16,6 @@ variable "bootstrap_complete" {
   default = "false"
 }
 
-variable "lb_mac" {
-  description = "OCP 4 HAProxy MAC Address"
-  type        = list(string)
-  default     = ["00:50:56:b1:ef:ac"]
-}
-
-variable "bootstrap_mac" {
-  description = "OCP 4 Bootstrap MAC Address"
-  type        = list(string)
-  default     = ["00:50:56:b1:c7:ae"]
-}
-
-variable "ignition" {
-  type    = string
-  default = ""
-}
-
 ##############
 ## VMware templates to clone
 
@@ -80,6 +63,10 @@ provider "ignition" {
   version = "1.2.1"
 }
 
+variable "ignition" {
+  type    = string
+  default = ""
+}
 
 #########
 ## Machine variables
