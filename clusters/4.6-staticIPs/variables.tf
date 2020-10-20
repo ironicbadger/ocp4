@@ -3,7 +3,7 @@
 
 variable "cluster_slug" {
   type    = string
-  default = "ocp45"
+  default = "ocp46"
 }
 
 variable "domain_name" {
@@ -37,7 +37,7 @@ variable "ignition" {
 ## VMware templates to clone
 
 data "vsphere_virtual_machine" "template" {
-  name          = "rhcos-4.6.0"
+  name          = "rhcos-4.6.0-0.nightly-2020-09-29-013537-x86_64-vmware.x86_64"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
@@ -131,8 +131,8 @@ variable "gateway" {
   type = string
 }
 
-variable "dns_addresses" {
-  type = list(string)
+variable "dns_address" {
+  type = string
 }
 
 variable "netmask" {

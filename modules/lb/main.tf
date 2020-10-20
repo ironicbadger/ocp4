@@ -3,15 +3,9 @@ data "ignition_systemd_unit" "haproxy" {
   content = file("${path.module}/haproxy.service")
 }
 
-data "ignition_filesystem" "root" {
-  name = "root"
-  path = "/"
-}
-
 data "ignition_file" "haproxy" {
-  filesystem = "root"
-  path       = "/etc/haproxy/haproxy.conf"
-  mode       = "420" // 0644
+  path = "/etc/haproxy/haproxy.conf"
+  mode = "420" // 0644
   content {
     content = templatefile("${path.module}/haproxy.tmpl", {
       lb_ip_address = var.lb_ip_address,
