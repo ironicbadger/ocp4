@@ -6,7 +6,7 @@ worker_ips = ["192.168.4.164", "192.168.4.165"]
 #worker_ips = ["192.168.4.164", "192.168.4.165", "192.168.4.166"]
 
 ## DNS
-dns_addresses = "192.168.1.254"
+dns_address = "192.168.1.254"
 gateway = "192.168.1.254"
 machine_cidr = "192.168.4.0/16"
 cluster_domain = "ocp4.ktz.lan"
