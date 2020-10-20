@@ -1,13 +1,15 @@
 # ironicbadger/ocp4
 
-This repo contains code to deploy Openshift 4 for my homelab. It focuses on UPI with vSphere 6.7u3. 
+This repo contains code to deploy Openshift 4 for my homelab. It focuses on UPI with vSphere 6.7u3.
+
+> Oct 20th 2020 - The code here is working against 4.6. This version of OCP uses Ignition v3 so is compatible with prior releases of RHCOS.
 
 ## Usage
 
 Code for each OCP release lives on a numbered branch. The master branch represents the latest stable iteration and will likely be behind branches. In otherwords, check the number branches first before looking at master.
 
 > * This repo *requires* Terraform 0.13
-> * Install `oc tools` with `./install-oc-tools.sh --latest 4.5`
+> * Install `oc tools` with `./install-oc-tools.sh --latest 4.6`
 > * This code use yamldecode - details here https://blog.ktz.me/store-terraform-secrets-in-yaml-files-with-yamldecode/
 
 0. Create `~/.config/ocp/vsphere.yaml` for `yamldecode` use, sample content:
@@ -49,7 +51,7 @@ pullSecret: 'YOUR_PULL_SECRET'
 sshKey: 'YOUR_SSH_PUBKEY'
 ```
 
-3. Customize `clusters/4.5/terraform.tfvars`, `clusters/4.5/main.tf`, and `clusters/4.5/variables.tf` with the relevant information. This repo assume you are doing mac address based DHCP reservations.
+3. Customize `clusters/4.6-staticIPs/terraform.tfvars`, `clusters/4.6-staticIPs/main.tf`, and `clusters/4.6-staticIPs/variables.tf` with the relevant information. This repo assume you are doing mac address based DHCP reservations.
 
 4. Run `make tfinit` to initialise Terraform modules
 5. Run `make create` to create the VMs and generate/install ignition configs
