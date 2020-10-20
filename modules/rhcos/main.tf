@@ -43,3 +43,7 @@ resource "vsphere_virtual_machine" "vm" {
   }
 
 }
+
+# data "vsphere_virtual_machine" "ipv4addresses" {
+#   guest_ip_addresses = data.vsphere_virtual_machine.vm
+# }
