@@ -4,7 +4,8 @@ tfinit:
 	cd clusters/4.6-staticIPs; terraform init
 
 create:
-	./generate-configs.sh
+	mkdir openshift/; cp generate-configs.sh openshift/
+	cd openshift/; ./generate-configs.sh
 	cd clusters/4.5; terraform apply -auto-approve
 
 static45:
