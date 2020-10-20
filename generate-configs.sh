@@ -14,7 +14,7 @@ openshift-install create manifests
 if [[ `uname` == 'Linux' ]] ; then 
 sed -i 's/mastersSchedulable: true/mastersSchedulable: false/g' manifests/cluster-scheduler-02-config.yml
 else 
-# macos sed will fail. if using macos uncomment below instead (requires `brew install gnu-sed`)
+# macos sed will fail, this script requires `brew install gnu-sed`
 gsed -i 's/mastersSchedulable: true/mastersSchedulable: false/g' manifests/cluster-scheduler-02-config.yml
 fi
 
