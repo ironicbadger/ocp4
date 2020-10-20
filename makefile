@@ -3,11 +3,15 @@ tfinit:
 	cd clusters/4.5-staticIPs; terraform init
 
 create:
-	./generate-configs.sh
+	mkdir openshift/; cp generate-configs.sh openshift/
+	cd openshift/; ./generate-configs.sh
 	cd clusters/4.5; terraform apply -auto-approve
 
 createstatic:
-	./generate-configs.sh
+	mkdir -p openshift/; 
+	cp generate-configs.sh openshift/
+	cp install-config.yaml openshift/
+	cd openshift/; ./generate-configs.sh
 	cd clusters/4.5-staticIPs; terraform apply -auto-approve
 
 remove-bootstrap:
