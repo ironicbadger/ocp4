@@ -1,13 +1,13 @@
 module "lb" {
-  source        = "../../modules/lb"
-  
-  ssh_key_file          = [file("~/.ssh/id_ed25519.pub")]
-  lb_ip_address         = var.loadbalancer_ip
+  source = "../../modules/lb"
+
+  ssh_key_file  = [file("~/.ssh/id_ed25519.pub")]
+  lb_ip_address = var.loadbalancer_ip
   api_backend_addresses = flatten([
     var.bootstrap_ip,
     var.master_ips]
   )
-  ingress               = var.worker_ips
+  ingress = var.worker_ips
 }
 
 module "lb_vm" {
@@ -22,14 +22,13 @@ module "lb_vm" {
   ignition         = module.lb.ignition
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   guest_id         = data.vsphere_virtual_machine.template.guest_id
-  datacenter_id    = yamldecode(file("~/.config/ocp/vsphere.yaml"))["vsphere-dc"]
   template         = data.vsphere_virtual_machine.template.id
   thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   network          = data.vsphere_network.network.id
   adapter_type     = data.vsphere_virtual_machine.template.network_interface_types[0]
   mac_address      = var.lb_mac[count.index]
   domain_name      = var.domain_name
-  
+
 }
 
 # output "ign" {
@@ -48,7 +47,6 @@ module "master" {
   ignition         = file(var.master_ignition_path)
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   guest_id         = data.vsphere_virtual_machine.template.guest_id
-  datacenter_id    = yamldecode(file("~/.config/ocp/vsphere.yaml"))["vsphere-dc"]
   template         = data.vsphere_virtual_machine.template.id
   thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   network          = data.vsphere_network.network.id
@@ -69,7 +67,6 @@ module "worker" {
   ignition         = file(var.worker_ignition_path)
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   guest_id         = data.vsphere_virtual_machine.template.guest_id
-  datacenter_id    = yamldecode(file("~/.config/ocp/vsphere.yaml"))["vsphere-dc"]
   template         = data.vsphere_virtual_machine.template.id
   thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   network          = data.vsphere_network.network.id
@@ -90,7 +87,6 @@ module "bootstrap" {
   ignition         = file(var.bootstrap_ignition_path)
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   guest_id         = data.vsphere_virtual_machine.template.guest_id
-  datacenter_id    = yamldecode(file("~/.config/ocp/vsphere.yaml"))["vsphere-dc"]
   template         = data.vsphere_virtual_machine.template.id
   thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
   network          = data.vsphere_network.network.id
