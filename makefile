@@ -13,14 +13,14 @@ static45:
 	cd clusters/4.5-staticIPs; terraform apply -auto-approve
 
 nuke45:
-	cd clusters/4.6-staticIPs; terraform destroy
+	cd clusters/4.6-coredns-and-staticIP; terraform destroy
 
 static46:
 	./generate-configs.sh
-	cd clusters/4.6-staticIPs; terraform apply -auto-approve
+	cd clusters/4.6-coredns-and-staticIP; terraform apply -auto-approve
 
 nuke46:
-	cd clusters/4.6-staticIPs; terraform destroy	
+	cd clusters/4.6-coredns-and-staticIP; terraform destroy	
 
 remove-bootstrap:
 	cd clusters/4.5; terraform apply -auto-approve -var 'bootstrap_complete=true'
