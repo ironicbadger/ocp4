@@ -17,10 +17,18 @@ data "ignition_file" "corefile" {
 }
 
 data "ignition_file" "openshift_lab_db" {
-  path = "/opt/coredns/openshift.lab.int.db"
+  path = "/opt/coredns/openshift.lab.int.dbtemp"
   mode = "420" // 0644
   content {
-    content = file("${path.module}/files/openshift.lab.int.db")
+    content = templatefile("${path.module}/files/openshift.lab.int.db.tmpl", {
+      cluster_slug    = var.cluster_slug,
+      cluster_domain  = var.cluster_domain,
+      coredns_ip      = var.coredns_ip,
+      loadbalancer_ip = var.loadbalancer_ip,
+      bootstrap_ip    = var.bootstrap_ip,
+      master_ips      = var.master_ips,
+      worker_ips      = var.worker_ips
+    })
   }
 }
 

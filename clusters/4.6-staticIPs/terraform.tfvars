@@ -6,16 +6,20 @@ master_ips = ["192.168.5.161", "192.168.5.162", "192.168.5.163"]
 worker_ips = ["192.168.5.164", "192.168.5.165"]
 #worker_ips = ["192.168.5.164", "192.168.5.165", "192.168.5.166"]
 
-## DNS
-dns_address = "192.168.5.169"
-coredns_upstream_dns = "192.168.1.254"
-gateway = "192.168.1.254"
+## Cluster configuration
+cluster_slug = "ocp46"
+cluster_domain = "openshift.lab.int"
 machine_cidr = "192.168.5.0/16"
-cluster_domain = "ocp46.openshift.lab.int"
 netmask ="255.255.0.0"
+
+## DNS
+local_dns = "192.168.5.169" # probably the same as coredns_ip
+public_dns = "192.168.1.254" # e.g. 1.1.1.1
+gateway = "192.168.1.254"
 
 ## Ignition paths
 ## Expects `openshift-install create ignition-configs` to have been run
+## probably via generate-configs.sh
 bootstrap_ignition_path = "../../openshift/bootstrap.ign"
 master_ignition_path = "../../openshift/master.ign"
 worker_ignition_path = "../../openshift/worker.ign"
