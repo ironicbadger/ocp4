@@ -80,7 +80,7 @@ module "bootstrap" {
 }
 
 module "lb" {
-  source = "../../modules/lb"
+  source = "../../modules/ignition_haproxy"
 
   ssh_key_file  = [file("~/.ssh/id_ed25519.pub")]
   lb_ip_address = var.loadbalancer_ip
