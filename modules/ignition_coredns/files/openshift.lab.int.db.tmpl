@@ -1,0 +1,27 @@
+$ORIGIN .
+$TTL 120;
+${cluster_domain}         IN SOA  ns1.${cluster_domain}. hostmaster.${cluster_domain}. (
+                                2011112904 ; serial
+                                60         ; refresh (1 minute)
+                                15         ; retry (15 seconds)
+                                1800       ; expire (30 minutes)
+                                10         ; minimum (10 seconds)
+                                )
+                        NS      ns1.${cluster_domain}.
+$ORIGIN ${cluster_slug}.${cluster_domain}.
+ns1                     A       ${coredns_ip}
+
+lb                      A       ${loadbalancer_ip}
+api                     A       ${loadbalancer_ip}
+api-int                 A       ${loadbalancer_ip}
+*.apps                  A       ${loadbalancer_ip}
+
+bootstrap               A       ${bootstrap_ip}
+
+%{ for index, master in master_ips ~}
+master${index+1}            A       ${master}
+%{ endfor ~}
+
+%{ for index, worker in worker_ips ~}
+worker${index+1}            A       ${worker}
+%{ endfor ~}

@@ -1,0 +1,18 @@
+[Unit]
+Description=coredns
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/bin/podman kill coredns
+ExecStartPre=-/bin/podman rm coredns
+ExecStartPre=/bin/podman pull quay.io/openshift/origin-coredns
+ExecStart=/bin/podman run --name coredns \
+  --net=host \
+  --privileged \
+  -v /opt/coredns/:/root/:Z \
+  quay.io/openshift/origin-coredns -conf /root/Corefile
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+.:53 {
+    forward . 8.8.8.8 8.8.4.4
+    errors
+}
+
+openshift.lab.int:53 {
+    file /root/openshift.lab.int.db
+    log
+    errors
+}

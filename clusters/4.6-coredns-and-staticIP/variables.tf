@@ -2,13 +2,7 @@
 ## OCP Cluster Vars
 
 variable "cluster_slug" {
-  type    = string
-  default = "ocp46"
-}
-
-variable "domain_name" {
-  type    = string
-  default = "ktz.lan"
+  type = string
 }
 
 variable "bootstrap_complete" {
@@ -106,6 +100,11 @@ variable "loadbalancer_ip" {
   default = ""
 }
 
+variable "coredns_ip" {
+  type    = string
+  default = ""
+}
+
 variable "cluster_domain" {
   type = string
 }
@@ -118,7 +117,11 @@ variable "gateway" {
   type = string
 }
 
-variable "dns_address" {
+variable "local_dns" {
+  type = string
+}
+
+variable "public_dns" {
   type = string
 }
 
