@@ -17,7 +17,7 @@ data "ignition_file" "corefile" {
 }
 
 data "ignition_file" "openshift_lab_db" {
-  path = "/opt/coredns/openshift.lab.int.dbtemp"
+  path = "/opt/coredns/openshift.lab.int.db"
   mode = "420" // 0644
   content {
     content = templatefile("${path.module}/files/openshift.lab.int.db.tmpl", {
