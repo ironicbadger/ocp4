@@ -8,7 +8,7 @@ variable "cluster_slug" {
 
 variable "domain_name" {
   type    = string
-  default = "ktz.lan"
+  default = "openshift.lab.int"
 }
 
 variable "bootstrap_complete" {
@@ -106,6 +106,11 @@ variable "loadbalancer_ip" {
   default = ""
 }
 
+variable "coredns_ip" {
+  type    = string
+  default = ""
+}
+
 variable "cluster_domain" {
   type = string
 }
@@ -119,6 +124,10 @@ variable "gateway" {
 }
 
 variable "dns_address" {
+  type = string
+}
+
+variable "coredns_upstream_dns" {
   type = string
 }
 

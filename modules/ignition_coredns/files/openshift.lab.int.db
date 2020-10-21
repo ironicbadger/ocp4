@@ -1,0 +1,27 @@
+$ORIGIN .
+$TTL 1; 1 seconds (for testing only)
+openshift.lab.int         IN SOA  ns1.openshift.lab.int. hostmaster.openshift.lab.int. (
+                                2011112904 ; serial
+                                60         ; refresh (1 minute)
+                                15         ; retry (15 seconds)
+                                1800       ; expire (30 minutes)
+                                10         ; minimum (10 seconds)
+                                )
+                        NS      ns1.openshift.lab.int.
+$ORIGIN ocp46.openshift.lab.int.
+ns1                     A       192.168.5.169
+
+lb                      A       192.168.5.160
+api                     A       192.168.5.160
+api-int                 A       192.168.5.160
+*.apps                  A       192.168.5.160
+
+bootstrap               A       192.168.5.168
+
+master1                 A       192.168.5.161
+master2                 A       192.168.5.162
+master3                 A       192.168.5.163
+
+worker1                 A       192.168.5.164
+worker2                 A       192.168.5.165
+worker3                 A       192.168.5.166

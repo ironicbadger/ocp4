@@ -116,7 +116,7 @@ module "lb_vm" {
   domain_name    = var.domain_name
   cluster_domain = var.cluster_domain
   machine_cidr   = var.machine_cidr
-  dns_address    = var.dns_address
+  dns_address    = var.coredns_upstream_dns
   gateway        = var.gateway
   ipv4_address   = var.loadbalancer_ip
   netmask        = var.netmask
@@ -125,3 +125,36 @@ module "lb_vm" {
 # output "ign" {
 #   value = module.lb.ignition
 # }
+
+module "coredns" {
+  source       = "../../modules/ignition_coredns"
+  ssh_key_file = [file("~/.ssh/id_ed25519.pub")]
+}
+
+module "dns_vm" {
+  source    = "../../modules/rhcos-static"
+  count     = 1
+  name      = "${var.cluster_slug}-coredns"
+  folder    = "awesomo/redhat/${var.cluster_slug}"
+  datastore = data.vsphere_datastore.nvme500.id
+  disk_size = 16
+  memory    = 1024
+  num_cpu   = 2
+  ignition  = module.coredns.ignition
+
+  resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
+  guest_id         = data.vsphere_virtual_machine.template.guest_id
+  template         = data.vsphere_virtual_machine.template.id
+  thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
+
+  network      = data.vsphere_network.network.id
+  adapter_type = data.vsphere_virtual_machine.template.network_interface_types[0]
+
+  domain_name    = var.domain_name
+  cluster_domain = var.cluster_domain
+  machine_cidr   = var.machine_cidr
+  dns_address    = var.coredns_upstream_dns
+  gateway        = var.gateway
+  ipv4_address   = var.coredns_ip
+  netmask        = var.netmask
+}
