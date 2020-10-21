@@ -7,6 +7,7 @@ worker_ips = ["192.168.5.164", "192.168.5.165"]
 #worker_ips = ["192.168.5.164", "192.168.5.165", "192.168.5.166"]
 
 ## Cluster configuration
+rhcos_template = "rhcos-4.6.0-0.nightly-2020-09-29-013537-x86_64-vmware.x86_64"
 cluster_slug = "ocp46"
 cluster_domain = "openshift.lab.int"
 machine_cidr = "192.168.5.0/16"

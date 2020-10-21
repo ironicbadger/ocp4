@@ -1,3 +1,8 @@
+data "vsphere_virtual_machine" "template" {
+  name          = var.rhcos_template
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
 module "master" {
   source    = "../../modules/rhcos-static"
   count     = length(var.master_ips)
