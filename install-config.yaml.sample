@@ -1,5 +1,5 @@
 apiVersion: v1
-baseDomain: ktz.lan
+baseDomain: openshift.lab.int
 compute:
 - hyperthreading: Enabled
   name: worker
@@ -9,7 +9,7 @@ controlPlane:
   name: master
   replicas: 3
 metadata:
-  name: ocp4
+  name: ocp46
 platform:
   vsphere:
     vcenter: 192.168.1.240
