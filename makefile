@@ -15,7 +15,7 @@ static45:
 nuke45:
 	cd clusters/4.6-coredns-and-staticIP; terraform destroy
 
-static46:
+46:
 	./generate-configs.sh
 	cd clusters/4.6-coredns-and-staticIP; terraform apply -auto-approve
 
@@ -57,3 +57,6 @@ approve-csr:
 	oc --kubeconfig openshift/auth/kubeconfig get csr -ojson | \
 		jq -r '.items[] | select(.status == {} ) | .metadata.name' | \
 		xargs oc --kubeconfig openshift/auth/kubeconfig adm certificate approve
+
+import-ova:
+	govc import.ova --folder=templates --ds=spc500 --name=rhcos-4.6.1 https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.6/4.6.1/rhcos-vmware.x86_64.ova

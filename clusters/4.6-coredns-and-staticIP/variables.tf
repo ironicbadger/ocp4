@@ -9,17 +9,12 @@ variable "bootstrap_complete" {
   type    = string
   default = "false"
 }
-
-##############
-## VMware templates to clone
-
-data "vsphere_virtual_machine" "template" {
-  name          = "rhcos-4.6.0-0.nightly-2020-09-29-013537-x86_64-vmware.x86_64"
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
-
 ################
 ## VMware vars - unlikely to need to change between releases of OCP
+
+variable "rhcos_template" {
+  type = string
+}
 
 provider "vsphere" {
   user           = yamldecode(file("~/.config/ocp/vsphere.yaml"))["vsphere-user"]
@@ -46,6 +41,16 @@ data "vsphere_network" "network" {
 
 data "vsphere_datastore" "nvme500" {
   name          = "nvme500"
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
+data "vsphere_datastore" "mx1tb" {
+  name          = "mx1tb"
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
+data "vsphere_datastore" "spc500" {
+  name          = "spc500"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
