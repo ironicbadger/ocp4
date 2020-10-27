@@ -44,6 +44,16 @@ data "vsphere_datastore" "nvme500" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
+data "vsphere_datastore" "mx1tb" {
+  name          = "mx1tb"
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
+data "vsphere_datastore" "spc500" {
+  name          = "spc500"
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
 ##########
 ## Ignition
 

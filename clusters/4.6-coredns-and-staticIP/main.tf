@@ -11,7 +11,7 @@ module "master" {
   datastore = data.vsphere_datastore.nvme500.id
   disk_size = 40
   memory    = 8192
-  num_cpu   = 4
+  num_cpu   = 8
   ignition  = file(var.master_ignition_path)
 
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
@@ -35,7 +35,7 @@ module "worker" {
   count     = length(var.worker_ips)
   name      = "${var.cluster_slug}-worker${count.index + 1}"
   folder    = "awesomo/redhat/${var.cluster_slug}"
-  datastore = data.vsphere_datastore.nvme500.id
+  datastore = data.vsphere_datastore.mx1tb.id
   disk_size = 40
   memory    = 8192
   num_cpu   = 4
@@ -65,7 +65,7 @@ module "bootstrap" {
   datastore = data.vsphere_datastore.nvme500.id
   disk_size = 40
   memory    = 8192
-  num_cpu   = 4
+  num_cpu   = 16
   ignition  = file(var.bootstrap_ignition_path)
 
   resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
@@ -101,7 +101,7 @@ module "lb_vm" {
   count     = 1
   name      = "${var.cluster_slug}-lb"
   folder    = "awesomo/redhat/${var.cluster_slug}"
-  datastore = data.vsphere_datastore.nvme500.id
+  datastore = data.vsphere_datastore.spc500.id
   disk_size = 16
   memory    = 1024
   num_cpu   = 2
@@ -145,7 +145,7 @@ module "dns_vm" {
   count     = 1
   name      = "${var.cluster_slug}-coredns"
   folder    = "awesomo/redhat/${var.cluster_slug}"
-  datastore = data.vsphere_datastore.nvme500.id
+  datastore = data.vsphere_datastore.spc500.id
   disk_size = 16
   memory    = 1024
   num_cpu   = 2

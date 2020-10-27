@@ -18,5 +18,11 @@ else
 gsed -i 's/mastersSchedulable: true/mastersSchedulable: false/g' manifests/cluster-scheduler-02-config.yml
 fi
 
+## delete machines and machinesets
+rm openshift/99_openshift-cluster-api_worker-machineset-0.yaml
+rm openshift/99_openshift-cluster-api_master-machines-0.yaml
+rm openshift/99_openshift-cluster-api_master-machines-1.yaml
+rm openshift/99_openshift-cluster-api_master-machines-2.yaml
+
 ## ignition config creation
 openshift-install create ignition-configs
