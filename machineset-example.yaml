@@ -27,7 +27,7 @@ spec:
           apiVersion: vsphereprovider.openshift.io/v1beta1
           credentialsSecret:
             name: vsphere-cloud-credentials
-          diskGiB: 40
+          diskGiB: 120
           kind: VSphereMachineProviderSpec
           memoryMiB: 8192
           metadata:
