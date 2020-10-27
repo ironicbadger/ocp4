@@ -2,7 +2,7 @@ apiVersion: machine.openshift.io/v1beta1
 kind: MachineSet
 metadata:
   labels:
-    machine.openshift.io/cluster-api-cluster: ocp46-tvqx5
+    machine.openshift.io/cluster-api-cluster: ocp46-_infraid_
   managedFields:
   - apiVersion: machine.openshift.io/v1beta1
   name: ocp46-worker
@@ -11,12 +11,12 @@ spec:
   replicas: 0
   selector:
     matchLabels:
-      machine.openshift.io/cluster-api-cluster: ocp46-tvqx5
+      machine.openshift.io/cluster-api-cluster: ocp46-_infraid_
       machine.openshift.io/cluster-api-machineset: ocp46-worker
   template:
     metadata:
       labels:
-        machine.openshift.io/cluster-api-cluster: ocp46-tvqx5
+        machine.openshift.io/cluster-api-cluster: ocp46-_infraid_
         machine.openshift.io/cluster-api-machine-role: worker
         machine.openshift.io/cluster-api-machine-type: worker
         machine.openshift.io/cluster-api-machineset: ocp46-worker
@@ -38,7 +38,7 @@ spec:
           numCPUs: 2
           numCoresPerSocket: 1
           snapshot: ""
-          template: rhcos-4.6.0-rc4
+          template: rhcos-4.6.1
           userDataSecret:
             name: worker-user-data
           workspace:
