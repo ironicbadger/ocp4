@@ -29,7 +29,7 @@ As you are thinking about the design of your cluster it will be useful to layout
 
 # DNS
 
-With more recent OCP releases [DNS requirements](https://docs.openshift.com/container-platform/4.6/installing/installing_vsphere/installing-vsphere.html#installation-dns-user-infra_installing-vsphere) have become much less onerous. Previously, `PTR` and `SRV` records were required but this is no longer the case and a collection of A records will now suffice.
+With more recent OCP releases [DNS requirements](https://docs.openshift.com/container-platform/4.6/installing/installing_vsphere/installing-vsphere.html#installation-dns-user-infra_installing-vsphere) have become much less onerous. Previously, `PTR` and `SRV` records were required but this is no longer the case and a collection of `A` records will now suffice.
 
 That said, DNS is extremely important to the success of the OpenShift 4 installer. Pay close attention to the records you create and verify each one before installation, especially the first time.
 
@@ -64,13 +64,11 @@ As this repo is configured to use static IPs, removing the provided CoreDNS impl
 
 # Static IPs, Ignition and Afterburn
 
-With prior releases DHCP was a requirement but Static IPs are now [supported](https://docs.openshift.com/container-platform/4.6/installing/installing_vsphere/installing-vsphere.html#network-connectivity_installing-vsphere). Previously MAC based reservations for DHCP "static IPs" were usediIn order to know what the IPs were going to be ahead of time. However, with some new changes in RHCOS 4.6 static IPs can now be reliably implemented by providing arguments to dracut at boot using [Afterburn](https://github.com/coreos/afterburn).
+With prior releases DHCP was a requirement but Static IPs are now [supported](https://docs.openshift.com/container-platform/4.6/installing/installing_vsphere/installing-vsphere.html#network-connectivity_installing-vsphere) and documented in the [release notes](https://docs.openshift.com/container-platform/4.6/release_notes/ocp-4-6-release-notes.html#ocp-4-6-static-ip-config-with-ova). Previously MAC based reservations for DHCP "static IPs" were used. In order to know what the IPs were going to be ahead of time. However, with some new changes in RHCOS 4.6 static IPs can now be reliably implemented by providing arguments to dracut at boot using [Afterburn](https://github.com/coreos/afterburn).
 
 RHCOS images are completely blank until [Ignition](https://github.com/coreos/ignition) provides them their configuration. Ignition is how we configure VMs with the information they need to know to become nodes in an Openshift cluster. It also paves the way for auto scaling and other useful things via [MachineSets](https://docs.openshift.com/container-platform/4.6/machine_management/creating-infrastructure-machinesets.html).
 
-Red Hat CoreOS 4.6 is the first release to use Ignition v3. 
-
-> At the time of writing only the `community-terraform-providers/ignition` provider supports the new Ignition v3 spec. 
+Red Hat CoreOS 4.6 is the first release to use Ignition v3. At the time of writing only the `community-terraform-providers/ignition` provider supports the new Ignition v3 spec. 
 
 A companion to Ignition is [Afterburn](https://github.com/coreos/afterburn), a tool which simplifies injecting network command-line arguments such as setting a static IP and hostname via Dracut at boot. Via Terraform we are able to use the [`extra_config`](https://registry.terraform.io/providers/hashicorp/vsphere/latest/docs/resources/virtual_machine#extra_config) option to pass in both the ignition config as well as set the required kernel arguments.
  
@@ -90,7 +88,7 @@ It's now time to gather the installation artifacts. Visit [try.openshift.com](ht
 * [RHCOS OVA](https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/)
 * [Pull Secret](https://cloud.redhat.com/openshift/install/pull-secret)
 
-> A colleague of mine ([cptmorgan-rh](https://github.com/cptmorgan-rh)) wrote a very useful OC client tools [helper script](https://github.com/cptmorgan-rh/install-oc-tools) which can be used to install `oc`, `kubectl` and `openshift-install` quickly with `./openshift-install --latest 4.6`.
+A colleague of mine ([cptmorgan-rh](https://github.com/cptmorgan-rh)) wrote a very useful OC client tools [helper script](https://github.com/cptmorgan-rh/install-oc-tools) which can be used to install `oc`, `kubectl` and `openshift-install` quickly with `./openshift-install --latest 4.6`.
 
 ## Import OVA
 
@@ -132,7 +130,7 @@ The next step is to generate the Kubernetes manifests and Ignition configs for e
 
 Now we will examine the script in the root of the repo entitled `generate-manifests.sh`. Be aware that the `openshift-install` command, by design, will read in your `install-config.yaml` file and then delete it. For this reason you might wish to keep a copy of `install-config.yaml` elsewhere, this is obviously not good practice when production credentials are involved and so is only a suggestion for lab purposes.
 
-> Whilst it might be tempting to try and reuse the bootstrap-files, this will not work reliably due to certificate expiration. Delete and regenerate all ignition files, auth files and base64 encoded files (everything in the `openshift` directory which is created) and rerun the `generate-manifests.sh` script.
+Whilst it might be tempting to try and reuse the bootstrap-files, this will not work reliably due to certificate expiration. Delete and regenerate all ignition files, auth files and base64 encoded files (everything in the `openshift` directory which is created) and rerun the `generate-manifests.sh` script.
 
 We are now safe to execute `generate-manifests.sh`. The resulting files in the newly created `openshift` directory are the Ignition config files that Terraform will be injecting into each node soon. Note that the script also deletes some automatically generated MachineSets - we'll cover adding a MachineSet later.
 
@@ -188,7 +186,7 @@ make lazy-install
 Once the installation is complete, you can safely remove the bootstrap node with the following command:
 
 ```
-cd clusters/ocp4.6-coredns-and-staticIP; terraform apply -auto-approve -var 'bootstrap_complete=true'
+cd clusters/4.6; terraform apply -auto-approve -var 'bootstrap_complete=true'
 ```
 
 ## Configuring a MachineSet
