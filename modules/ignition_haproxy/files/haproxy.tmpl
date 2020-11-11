@@ -11,21 +11,16 @@ defaults
   timeout server       86400s
   timeout tunnel       86400s
 
-frontend stats
-	bind ${lb_ip_address}:1936
-        mode            http
-        log             global
-        maxconn 10
-        clitimeout      100s
-        srvtimeout      100s
-        contimeout      100s
-        timeout queue   100s
-        stats enable
-        stats hide-version
-        stats refresh 10s
-        stats show-node
-        stats auth admin:password
-        stats uri  /haproxy?stats
+listen stats
+    bind  *:1936
+    mode  http
+    log   global
+    stats enable
+    stats hide-version
+    stats refresh 10s
+    stats show-node
+    stats auth admin:password
+    stats uri /haproxy?stats
 
 frontend api-server
     bind ${lb_ip_address}:6443
@@ -68,4 +63,3 @@ backend router-https
     %{ for addr in ingress ~}
     server ${addr} ${addr}:443 check
     %{ endfor ~}
-
