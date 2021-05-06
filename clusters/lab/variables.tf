@@ -5,6 +5,10 @@ variable "cluster_slug" {
   type = string
 }
 
+variable "vmware_folder" {
+  type = string
+}
+
 variable "bootstrap_complete" {
   type    = string
   default = "false"
@@ -39,18 +43,8 @@ data "vsphere_network" "network" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-data "vsphere_datastore" "nvme500" {
-  name          = "nvme500"
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
-
-data "vsphere_datastore" "mx1tb" {
-  name          = "mx1tb"
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
-
-data "vsphere_datastore" "spc500" {
-  name          = "spc500"
+data "vsphere_datastore" "nvme" {
+  name          = "nvme2tb970"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 

@@ -7,8 +7,8 @@ module "master" {
   source    = "../../modules/rhcos-static"
   count     = length(var.master_ips)
   name      = "${var.cluster_slug}-master${count.index + 1}"
-  folder    = "awesomo/redhat/${var.cluster_slug}"
-  datastore = data.vsphere_datastore.nvme500.id
+  folder    = "${var.vmware_folder}/${var.cluster_slug}"
+  datastore = data.vsphere_datastore.nvme.id
   disk_size = 40
   memory    = 8192
   num_cpu   = 8
@@ -34,8 +34,8 @@ module "worker" {
   source    = "../../modules/rhcos-static"
   count     = length(var.worker_ips)
   name      = "${var.cluster_slug}-worker${count.index + 1}"
-  folder    = "awesomo/redhat/${var.cluster_slug}"
-  datastore = data.vsphere_datastore.mx1tb.id
+  folder    = "${var.vmware_folder}/${var.cluster_slug}"
+  datastore = data.vsphere_datastore.nvme.id
   disk_size = 40
   memory    = 8192
   num_cpu   = 4
@@ -61,8 +61,8 @@ module "bootstrap" {
   source    = "../../modules/rhcos-static"
   count     = "${var.bootstrap_complete ? 0 : 1}"
   name      = "${var.cluster_slug}-bootstrap"
-  folder    = "awesomo/redhat/${var.cluster_slug}"
-  datastore = data.vsphere_datastore.nvme500.id
+  folder    = "${var.vmware_folder}/${var.cluster_slug}"
+  datastore = data.vsphere_datastore.nvme.id
   disk_size = 40
   memory    = 8192
   num_cpu   = 16
@@ -100,8 +100,8 @@ module "lb_vm" {
   source    = "../../modules/rhcos-static"
   count     = 1
   name      = "${var.cluster_slug}-lb"
-  folder    = "awesomo/redhat/${var.cluster_slug}"
-  datastore = data.vsphere_datastore.spc500.id
+  folder    = "${var.vmware_folder}/${var.cluster_slug}"
+  datastore = data.vsphere_datastore.nvme.id
   disk_size = 16
   memory    = 1024
   num_cpu   = 2
@@ -144,8 +144,8 @@ module "dns_vm" {
   source    = "../../modules/rhcos-static"
   count     = 1
   name      = "${var.cluster_slug}-coredns"
-  folder    = "awesomo/redhat/${var.cluster_slug}"
-  datastore = data.vsphere_datastore.spc500.id
+  folder    = "${var.vmware_folder}/${var.cluster_slug}"
+  datastore = data.vsphere_datastore.nvme.id
   disk_size = 16
   memory    = 1024
   num_cpu   = 2

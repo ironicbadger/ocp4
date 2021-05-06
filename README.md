@@ -1,8 +1,14 @@
 # ironicbadger/ocp4
 
-This repo contains code to deploy Openshift 4 for my homelab. It focuses on UPI with vSphere 6.7u3.
+This repo contains code to deploy Openshift 4 for my homelab. It focuses on UPI with vSphere 6.7u3, a full write up is available on [openshift.com](https://www.openshift.com/blog/how-to-install-openshift-4.6-on-vmware-with-upi).
 
-> Oct 20th 2020 - The code here is working against 4.6. This version of OCP uses Ignition v3 so is incompatible with prior releases of RHCOS.
+> May 2021 - The code here is working against 4.7.
+
+## Pre-reqs
+
+On a Mac you will need to install a few packages via `brew`.
+
+    brew install jq watch gsed
 
 ## Usage
 
@@ -10,25 +16,25 @@ Code for each OCP release lives on a numbered branch. The master branch represen
 
 > * This repo *requires* Terraform 0.13
 > * Install `oc tools` with `./install-oc-tools.sh --latest 4.6`
-> * This code use yamldecode - details here https://blog.ktz.me/store-terraform-secrets-in-yaml-files-with-yamldecode/
+> * This code use yamldecode - details [here](https://blog.ktz.me/store-terraform-secrets-in-yaml-files-with-yamldecode/)
 
 0. Create `~/.config/ocp/vsphere.yaml` for `yamldecode` use, sample content:
 
 ```
 alex@mooncake ~ % cat .config/ocp/vsphere.yaml
-vsphere-user: administrator@vsphere.lan
+vsphere-user: administrator@vsphere.local
 vsphere-password: "123!"
 vsphere-server: 192.168.1.240
 vsphere-dc: ktzdc
 vsphere-cluster: ktzcluster
 ```
 
-1. Configure DNS - https://blog.ktz.me/configure-unbound-dns-for-openshift-4/
-2. Create `install-config.yaml`
+1. Configure DNS - https://blog.ktz.me/configure-unbound-dns-for-openshift-4/ - if using CoreDNS this is optional.
+2. Create `install-config.yaml` and ensure `cluster_slug` matches `metadata: name:` below.
 
 ```
 apiVersion: v1
-baseDomain: ktz.lan
+baseDomain: openshift.lab.int
 compute:
 - hyperthreading: Enabled
   name: worker
@@ -42,7 +48,7 @@ metadata:
 platform:
   vsphere:
     vcenter: 192.168.1.240
-    username: administrator@vsphere.lan
+    username: administrator@vsphere.local
     password: supersecretpassword
     datacenter: ktzdc
     defaultDatastore: nvme
@@ -51,7 +57,7 @@ pullSecret: 'YOUR_PULL_SECRET'
 sshKey: 'YOUR_SSH_PUBKEY'
 ```
 
-3. Customize `clusters/4.6-staticIPs/terraform.tfvars`, `clusters/4.6-staticIPs/main.tf`, and `clusters/4.6-staticIPs/variables.tf` with the relevant information. This repo assume you are doing mac address based DHCP reservations.
+3. Customize `clusters/lab/terraform.tfvars` with any relevant configuration.
 
 4. Run `make tfinit` to initialise Terraform modules
 5. Run `make create` to create the VMs and generate/install ignition configs
