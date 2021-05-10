@@ -1,0 +1,32 @@
+config:
+  runStrategy:
+    runs: 5
+    maxSecondsBetweenRuns: 15
+    minSecondsBetweenRuns: 1
+scenarios:
+  - name: "delete etcd pods"
+    steps:
+    - podAction:
+        matches:
+          - labels:
+              namespace: "openshift-etcd"
+              selector: "k8s-app=etcd"
+        filters:
+          - randomSample:
+              size: 3
+        actions:
+          - kill:
+              probability: 1
+              force: true
+    - podAction:
+        matches:
+          - labels:
+              namespace: "openshift-etcd"
+              selector: "k8s-app=etcd"
+        retries:
+          retriesTimeout:
+            timeout: 180
+
+        actions:
+          - checkPodCount:
+              count: 3
