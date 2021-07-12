@@ -14,7 +14,7 @@ On a Mac you will need to install a few packages via `brew`.
 
 Code for each OCP release lives on a numbered branch. The master branch represents the latest stable iteration and will likely be behind branches. In otherwords, check the number branches first before looking at master.
 
-> * This repo *requires* Terraform 0.13
+> * This repo *requires* Terraform 0.13 or newer
 > * Install `oc tools` with `./install-oc-tools.sh --latest 4.6`
 > * This code use yamldecode - details [here](https://blog.ktz.me/store-terraform-secrets-in-yaml-files-with-yamldecode/)
 
