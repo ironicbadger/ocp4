@@ -1,6 +1,8 @@
 openshift/
 install-config.yaml
 
+.vscode
+
 # for vim swap files
 *.swp
 
