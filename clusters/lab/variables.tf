@@ -51,10 +51,10 @@ data "vsphere_datastore" "nvme" {
 ##########
 ## Ignition
 
-provider "ignition" {
+#provider "ignition" {
   # https://www.terraform.io/docs/providers/ignition/index.html
-  version = "1.2.1"
-}
+#  version = "1.2.1"
+#}
 
 variable "ignition" {
   type    = string

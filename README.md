@@ -60,7 +60,7 @@ sshKey: 'YOUR_SSH_PUBKEY'
 3. Customize `clusters/lab/terraform.tfvars` with any relevant configuration.
 
 4. Run `make tfinit` to initialise Terraform modules
-5. Run `make create` to create the VMs and generate/install ignition configs
+5. Run `make lab` to create the VMs and generate/install ignition configs
 6. Monitor install progress with `make wait-for-bootstrap`
 7. Check and approve pending CSRs with `make get-csr` and `make approve-csr`
 8. Run `make bootstrap-complete` to destroy the bootstrap VM

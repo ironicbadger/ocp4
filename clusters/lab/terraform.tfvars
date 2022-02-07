@@ -8,8 +8,8 @@ worker_ips = ["192.168.5.164", "192.168.5.165", "192.168.5.166"]
 
 ## Cluster configuration
 vmware_folder = "redhat/openshift"
-rhcos_template = "rhcos-4.7.7"
-cluster_slug = "ocp47"
+rhcos_template = "rhcos-4.9.0"
+cluster_slug = "ocp4"
 cluster_domain = "openshift.lab.int"
 machine_cidr = "192.168.5.0/20"
 netmask ="255.255.240.0"
